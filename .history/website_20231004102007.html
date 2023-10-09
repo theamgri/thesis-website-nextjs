@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gecko</title>
+    <link rel="icon" type="image/x-icon" href="/images/icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    
+</head>
+<body class="bg-gray-100">
+
+<nav class="bg-white drop-shadow-2xl border-gray-200 dark:bg-gray-900">
+    <div class="flex flex-wrap items-center justify-between mx-auto p-4">
+      <a href="." class="flex items-center">
+          <img src="images/icon.png" class="h-8 mr-3 rounded-xl" alt="Logo" />
+          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Gecko</span>
+      </a>
+      <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+          </svg>
+      </button>
+      <div class="hidden w-full md:block md:w-auto drop-shadow-2xl" id="navbar-default">
+        <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <li>
+                <div class="relative">
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        class="block w-full py-2 pl-10 pr-4 leading-5 rounded-2xl shadow-sm focus:ring focus:ring-blue-200 border-gray-300" style="background-color: #DEDEDE;"
+                    />
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <svg
+                            class="w-5 h-5 text-gray-400"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M21 21l-4.35-4.35"
+                            />
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M15 10a5 5 0 11-10 0 5 5 0 0110 0z"
+                            />
+                        </svg>
+                    </div>
+                </div>
+                
+              </li>
+            <li>
+              <img src="images/bellbutton.png" class="h-8 mr-3 rounded-xl" alt="Notification Bell" />
+          </li>
+          <li>
+            <button class="bg-black drop-shadow-2xl hover:bg-blue-700 text-white font-normal py-1 px-8 rounded-full">
+              Create
+            </button>
+          </li>
+          <li>
+            <a href="your-link-here">
+                <img src="images/user.jpg" class="h-8 mr-3 rounded-full" alt="Notification Bell" />
+            </a>
+        </li>
+        
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+<!-- //SIDE NAVBAR -->
+  
+
+<div class="sm:hidden">
+  <label for="tabs" class="sr-only">Select your country</label>
+  <select id="tabs" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <option>Profile</option>
+      <option>Canada</option>
+      <option>France</option>
+      <option>Germany</option>
+  </select>
+</div>
+<ul class="m-5 rounded-2xl drop-shadow-xl hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+  <li class="w-full">
+      <a href="#" class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-current="page">Dashboard</a>
+  </li>
+  <li class="w-full">
+      <a href="#" class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Sentiment Analysis</a>
+  </li>
+  <li class="w-full">
+      <a href="#" class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Hate Speech Source</a>
+  </li>
+  <li class="w-full">
+      <a href="#" class="inline-block w-full p-4 bg-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Daily Weekend Trends</a>
+  </li>
+  
+</ul>
+
+
+
+
+  <div class="ml-5 text-left font-bold text-2xl opacity-50">
+    <h1>Analytics Overview</h1> 
+  </div>
+
+<!-- ... (previous code) ... -->
+
+<div class="m-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4">
+  <!-- Container for Pie Chart (2 rows) -->
+  <div class="bg-white p-4 rounded-lg shadow-md" style="background-color: transparent; grid-row: span 2; overflow: visible;">
+      <!-- Content goes here, such as the chart -->
+      <h2 class="text-lg text-center opacity-50 font-semibold">Pie Chart</h2>
+      <div style="position: relative;">
+          <canvas class="p-4" id="donutChart" width="100" height="100"></canvas>
+          <div style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); text-align: center;">
+              <!-- Display labels here -->
+              <div style="display: inline-block; margin-right: 10px;">
+                  <div style="background-color: rgb(255, 99, 132); width: 15px; height: 15px; display: inline-block; margin-right: 5px;"></div>
+                  <span>Red</span>
+              </div>
+              <div style="display: inline-block; margin-right: 10px;">
+                  <div style="background-color: rgb(255, 159, 64); width: 15px; height: 15px; display: inline-block; margin-right: 5px;"></div>
+                  <span>Orange</span>
+              </div>
+              <div style="display: inline-block; margin-right: 10px;">
+                  <div style="background-color: rgb(255, 205, 86); width: 15px; height: 15px; display: inline-block; margin-right: 5px;"></div>
+                  <span>Yellow</span>
+              </div>
+              <div style="display: inline-block; margin-right: 10px;">
+                  <div style="background-color: rgb(75, 192, 192); width: 15px; height: 15px; display: inline-block; margin-right: 5px;"></div>
+                  <span>Green</span>
+              </div>
+              <div style="display: inline-block; margin-right: 10px;">
+                  <div style="background-color: rgb(54, 162, 235); width: 15px; height: 15px; display: inline-block; margin-right: 5px;"></div>
+                  <span>Blue</span>
+              </div>
+          </div>
+      </div>
+      <!-- Optionally, you can add a label or title for the container -->
+      <script>
+        // Ensure that the DOM is fully loaded before initializing the chart
+        document.addEventListener("DOMContentLoaded", function() {
+            const donutData = {
+                type: 'doughnut',
+                data: {
+                    datasets: [
+                        {
+                            data: [10, 20, 15, 5, 50],
+                            backgroundColor: [
+                                'rgb(255, 99, 132)',
+                                'rgb(255, 159, 64)',
+                                'rgb(255, 205, 86)',
+                                'rgb(75, 192, 192)',
+                                'rgb(54, 162, 235)',
+                            ],
+                        },
+                    ],
+                    labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false, // Hide the legend
+                        },
+                        datalabels: {
+                            formatter: (value) => {
+                                if (value < 15) return '';
+                                return value + '%';
+                            },
+                        },
+                    },
+                },
+            };
+    
+            var donutChart = new Chart(
+                document.getElementById("donutChart"),
+                donutData
+            );
+        });
+    </script>
+  </div>
+
+  <!-- Container 1 -->
+  <div class="bg-white p-4 rounded-lg shadow-md" style="background-color: #D9D9D9; height: 15rem;">
+      <h2 class="text-lg text-center opacity-50 font-semibold">Offensive Language Analysis</h2>
+      <div style="width: 80%; margin: auto;">
+        <canvas id="roundedBarChart"></canvas>
+    </div>
+    <script>
+      var ctx = document.getElementById('roundedBarChart').getContext('2d');
+      
+      var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+      gradient.addColorStop(0, 'rgba(255, 99, 132, 0.7)');
+      gradient.addColorStop(1, 'rgba(255, 99, 132, 1)');
+      
+      var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+              datasets: [{
+                  label: 'Monthly Data',
+                  data: [10, 50, 30, 90, 60, 70],
+                  backgroundColor: gradient, // Use the gradient as the background color
+                  borderColor: 'rgba(255, 99, 132, 1)',
+                  borderWidth: 2,
+                  borderRadius: 15, // Set the border radius for rounded edges
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              },
+              plugins: {
+                  legend: {
+                      display: false
+                  }
+              }
+          }
+      });
+  </script>
+  </div>
+
+  <!-- Container 2 -->
+  <div class="bg-white p-4 rounded-lg shadow-md" style="background-color: #D9D9D9; height: 15rem;">
+      <h2 class="text-lg text-center opacity-50 font-semibold">Data Filters</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+  </div>
+</div>
+
+
+
+
+
+  <div class="container mx-auto mt-0">
+    
+    <div class="m-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4">
+        <!-- Container 1 -->
+        <div class="bg-white p-4 rounded-lg shadow-md" style="background-color: #D9D9D9; height: 15rem;">
+            <h2 class="text-lg text-center opacity-50 font-semibold" >Offensive Language Analysis</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+
+        <!-- Container 2 -->
+        <div class="bg-white p-4 rounded-lg shadow-md"  style="background-color: #D9D9D9; height: 15rem;">
+            <h2 class="text-lg text-center opacity-50 font-semibold">Data Filters</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+    </div>
+    <div class="m-5 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 gap-4 mt-4">
+      <!-- Container 3 -->
+      <div class="bg-white p-4 rounded-lg shadow-md" style="background-color: #D9D9D9; height: 20rem;">
+          <h2 class="text-lg opacity-50 font-semibold">Hate Speech Source</h2>
+  
+          <div class="overflow-hidden rounded-lg shadow-md" style="max-height: 100%;">
+              <!-- Set max-height to ensure the chart fits within the container -->
+              <canvas class="p-6" id="barChart" style="max-height: 100%;"></canvas>
+          </div>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
+          integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script>
+          const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'];
+        const data = {
+            labels: labels,
+            datasets: [
+                {
+                    label: "Tailwind CSS",
+                    backgroundColor: "blue",
+                    borderColor: 'rgb(0, 0, 0)',
+                    data: [112, 10, 225, 134, 101, 80, 50, 100, 200],
+                    fill: false,
+                },
+            ],
+        };
+
+        const configChart = {
+            type: "bar",
+            data,
+            options: {},
+        };
+
+        var chartLine = new Chart(
+            document.getElementById("barChart"),
+            configChart
+        );
+      </script>
+  </div>
+  
+
+    <div class="m-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 mt-4">
+    <!-- Container 4 -->
+    <div class="bg-white p-4 rounded-lg shadow-md" style="background-color: #D9D9D9;">
+        <h2 class="text-lg tex-center opacity-50 font-semibold">Sentiment Analysis</h2>
+        <div>
+          <canvas id="horizontal-bar-chart"></canvas>
+      </div>
+
+      <script>
+         new Chart(document.getElementById("horizontal-bar-chart"), {
+            type: 'bar',
+            data: {
+                labels: ["Data 1", "Data 2", "Data 3", "Data 4", "Data 5"],
+                datasets: [{
+                    label: "Data Count",
+                    backgroundColor: ["#51EAEA", "#FCDDB0",
+                        "#FF9D76", "#FB3569", "#82CD47"
+                    ],
+                    data: [478, 267, 829, 1732, 1213]
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Chart JS Horizontal Bar Chart Example'
+                }
+            }
+        });
+      </script>
+          
+    </div>
+
+    <!-- Container 5 -->
+    <div class="bg-white p-4 rounded-lg shadow-md" style="background-color: #D9D9D9; height: 25rem;">
+        <h2 class="text-lg text-center opacity-50 font-semibold">Daily Weekend Trends</h2>
+       
+            
+            <canvas id="line-chart" width="800" height="400"></canvas>
+
+<script>
+new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+    datasets: [{ 
+        data: [86,114,106,106,107,111,133,221,783,2478],
+        label: "Data 1",
+        borderColor: "#3e95cd",
+        fill: false
+      }, { 
+        data: [282,350,411,502,635,809,947,1402,3700,5267],
+        label: "Data 2",
+        borderColor: "#8e5ea2",
+        fill: false
+      }, { 
+        data: [168,170,178,190,203,276,408,547,675,734],
+        label: "Data 3",
+        borderColor: "#3cba9f",
+        fill: false
+      }, { 
+        data: [40,20,10,16,24,38,74,167,508,784],
+        label: "Data 4",
+        borderColor: "#e8c3b9",
+        fill: false
+      }, { 
+        data: [6,3,2,2,7,26,82,172,312,433],
+        label: "Data 5",
+        borderColor: "#c45850",
+        fill: false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'World population per region (in millions)'
+    }
+  }
+});
+
+</script>
+        
+    </div>
+    
+</div>
+
+
+</body>
+</html>
