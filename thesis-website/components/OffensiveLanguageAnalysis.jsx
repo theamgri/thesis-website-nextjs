@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
-// import firebase from 'firebase/app';
+import 'firebase/database';
+import 'firebase/compat/firestore';
 import firebase from 'firebase/compat/app';
+
+
+
 const OffensiveLanguageAnalysis = () => {
   const [data, setData] = useState([]);
   const [totalItems, setTotalItems] = useState(0); // Added totalItems state

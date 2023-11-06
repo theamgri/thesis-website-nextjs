@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "chart.js": "^4.4.0",
+    "chart.js": "^3.9.1",
     "firebase": "^10.5.2",
     "next": "14.0.1",
     "react": "^18",

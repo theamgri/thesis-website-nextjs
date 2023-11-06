@@ -2,10 +2,11 @@
 import Navbar from '../components/Navbar';
 import { db } from '../firebase';
 import DataFilters from '../components/DataFilters';
+import DailyWeekendTrends from '../components/DailyWeekendTrends';
 import HateSpeech from '@/components/HateSpeech';
 import OffensiveLanguageAnalysis from '@/components/OffensiveLanguageAnalysis';
-
-
+import SentimentAnalysis from '@/components/SentimentAnalysis';
+import Overview from '@/components/Overview';
 // fetching data
 const fetchData = async () => {
   const data = await db.collection('sentiment').get();
@@ -38,6 +39,12 @@ export default function Home() {
         <li class="w-full">
         {/* <!-- Add an ID to the link for JavaScript --> */}
         <a id="sentimentLink" href="#" class="inline-block font-medium w-full h-full p-4 hover:text-white focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:bg-gray-700">
+            <i class="fas fa-chart-line"></i> Data Filters
+        </a>
+    </li>
+        <li class="w-full">
+        {/* <!-- Add an ID to the link for JavaScript --> */}
+        <a id="sentimentLink" href="#" class="inline-block font-medium w-full h-full p-4 hover:text-white focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:bg-gray-700">
             <i class="fas fa-chart-line"></i> Sentiment Analysis
         </a>
     </li>
@@ -62,11 +69,32 @@ export default function Home() {
     </ul>
       </div>
     {/* DERE NA IBUTANG ANG CHART.jS */}
-      <div>
-      {/* <DataFilters firebase={firebase} firestore={firestore} /> */}
-      <DataFilters />
-      <HateSpeech />
-      <OffensiveLanguageAnalysis />
+    <div className="flex flex-wrap">
+      {/* First Column */}
+      <div className="w-1/2 p-4">
+        <Overview />
+      </div>
+
+      {/* Second Column */}
+      <div className="w-1/2 p-4">
+        <div className="flex flex-wrap">
+          <div className="w-1/2 p-2">
+            <DataFilters />
+          </div>
+          <div className="w-1/2 p-2">
+            <HateSpeech />
+          </div>
+          <div className="w-1/2 p-2">
+            <OffensiveLanguageAnalysis />
+          </div>
+          <div className="w-1/2 p-2">
+            <DailyWeekendTrends />
+          </div>
+          <div className="w-1/2 p-2">
+            <SentimentAnalysis />
+          </div>
+        </div>
+      </div>
       </div>
     </div>
     
