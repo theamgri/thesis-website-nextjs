@@ -1,12 +1,13 @@
 "use client"
 import Navbar from '../components/Navbar';
-import { db } from '../firebase';
+import { db } from '../components/firebase.jsx';
 import DataFilters from '../components/DataFilters';
 import DailyWeekendTrends from '../components/DailyWeekendTrends';
 import HateSpeech from '@/components/HateSpeech';
 import OffensiveLanguageAnalysis from '@/components/OffensiveLanguageAnalysis';
 import SentimentAnalysis from '@/components/SentimentAnalysis';
 import Overview from '@/components/Overview';
+// import { db } from './firebase.jsx';
 // fetching data
 const fetchData = async () => {
   const data = await db.collection('sentiment').get();
@@ -32,7 +33,8 @@ export default function Home() {
       <div>
       <ul class="m-5 rounded-2xl drop-shadow-xl hidden text-sm font-medium text-center text-white divide-x divide-gray-200 rounded-lg shadow sm:flex bg-black dark:bg-gray-900 dark:divide-gray-700">
       <li class="w-full">
-          <a href="#" className="inline-block font-medium w-full h-full p-4 text-black bg-gray-200 hover:bg-blue-300 focus:ring-4 focus:ring-blue-300 focus:outline-none" aria-current="page">
+          {/* <a href="#" className="inline-block font-medium w-full h-full p-4 text-black bg-gray-200 hover:bg-blue-300 focus:ring-4 focus:ring-blue-300 focus:outline-none" aria-current="page"> */}
+          <a id="sentimentLink" href="#" class="inline-block font-medium w-full h-full p-4 hover:text-white focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:bg-gray-700">
         <i class="fas fa-tachometer-alt"></i> Dashboard
           </a>
         </li>
