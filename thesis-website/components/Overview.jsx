@@ -4,28 +4,35 @@ import { db } from './firebase';
 import { Doughnut } from 'react-chartjs-2';
 
 const HateSpeechOverview = () => {
-  const [hateSpeechData, setHateSpeechData] = useState([]);
+  const [totalHateSpeech, setTotalHateSpeech] = useState(0);
   const [totalContent, setTotalContent] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  let totalHateSpeech = 0;
+  const [hateSpeechData, setHateSpeechData] = useState([]); // Initialize an empty array
 
   async function fetchData() {
     try {
       const querySnapshot = await getDocs(collection(db, 'tweets'));
-      const hateSpeechData = [];
+      const updatedHateSpeechData = []; // Initialize to an empty array
+      let updatedTotalHateSpeech = 0; // Initialize to 0
+
       querySnapshot.forEach((doc) => {
         const entry = doc.data();
-        const toxicityScore = entry.toxicity_score;
+        const toxicityScore = entry.TOXCITY_SCORE;
 
-        if (Array.isArray(toxicityScore) && toxicityScore.length > 0) {
-          const isHateSpeech = toxicityScore[0] > 0.5;
-          hateSpeechData.push({ ...entry, isHateSpeech });
-          totalHateSpeech += isHateSpeech ? 1 : 0;
+        if (typeof toxicityScore === 'number' || !isNaN(Number(toxicityScore))) {
+          const isHateSpeech = Number(toxicityScore) > 0.5;
+          updatedHateSpeechData.push({ ...entry, isHateSpeech });
+          updatedTotalHateSpeech += isHateSpeech ? 1 : 0;
+        } else {
+          // Handle non-numeric or invalid scores if necessary
+          console.error('Invalid toxicity score:', toxicityScore);
         }
       });
-      setHateSpeechData(hateSpeechData);
+
+      setHateSpeechData(updatedHateSpeechData);
       setTotalContent(querySnapshot.size);
+      setTotalHateSpeech(updatedTotalHateSpeech); // Update the totalHateSpeech state
     } catch (error) {
       console.error('Error fetching data:', error);
       setError(error);

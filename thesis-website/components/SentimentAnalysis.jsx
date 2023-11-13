@@ -39,7 +39,7 @@ const SentimentAnalysis = () => {
     const categoryCounts = {};
 
     sentimentData.forEach((entry) => {
-      if (entry.toxicity_score > 0.5 && entry.category) {
+      if (entry.category) {
         categoryCounts[entry.category] = (categoryCounts[entry.category] || 0) + 1;
       }
     });

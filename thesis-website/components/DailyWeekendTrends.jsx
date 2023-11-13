@@ -15,7 +15,7 @@ const DailyWeekendTrends = () => {
         const entry = doc.data();
         return {
           timestamp: entry.timestamp.toDate(),
-          toxicity_score: entry.toxicity_score, // Assuming toxicity_score is a single number
+          TOXCITY_SCORE: entry.TOXCITY_SCORE, // Assuming toxicity_score is a single number
         };
       });
   
@@ -34,7 +34,7 @@ const DailyWeekendTrends = () => {
   const countDocuments = async () => {
     try {
       // Use the same query as fetchData
-      const querySnapshot = await getDocs(query(collection(db, 'tweets'), where('toxicity_score', '>', 0.5)));
+      const querySnapshot = await getDocs(query(collection(db, 'tweets'), where('TOXCITY_SCORE', '>', 0.5)));
       const documentCount = querySnapshot.size;
       console.log('Document Count:', documentCount);
     } catch (error) {
@@ -60,9 +60,7 @@ const DailyWeekendTrends = () => {
     countDocuments();
   }, []); // Run once when the component mounts
 
- // ... (other imports and component setup)
 
-// ... (imports and setup)
 
 useEffect(() => {
   console.log('Timestamp Data:', timestampData);
@@ -76,17 +74,7 @@ useEffect(() => {
       }
 
       const labels = timestampData.map((entry) => identifyDay(entry.timestamp));
-      const toxicityScores = timestampData.map((entry) => {
-        const score = entry.toxicity_score;
-
-        if (Array.isArray(score) && score.length > 0) {
-          // If toxicity_score is an array, use the first element
-          return score[0];
-        }
-
-        // If toxicity_score is not an array, use the value as is
-        return score;
-      });
+      const toxicityScores = timestampData.map((entry) => entry.TOXCITY_SCORE); // Corrected field name
 
       console.log('Labels:', labels);
       console.log('Toxicity Scores:', toxicityScores);
@@ -154,8 +142,14 @@ useEffect(() => {
 
 // ... (rest of the component)
 
+// ... (rest of the component)
+
 
 // ... (rest of the component)
+
+
+
+
 
 
   return (
