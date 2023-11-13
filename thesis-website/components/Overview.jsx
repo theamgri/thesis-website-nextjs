@@ -12,18 +12,18 @@ const HateSpeechOverview = () => {
 
   async function fetchData() {
     try {
-      const querySnapshot = await getDocs(collection(db, 'drafts'));
+      const querySnapshot = await getDocs(collection(db, 'tweets'));
       const hateSpeechData = [];
-
       querySnapshot.forEach((doc) => {
         const entry = doc.data();
-        hateSpeechData.push(entry);
+        const toxicityScore = entry.toxicity_score;
 
-        if (entry.isHateSpeech) {
-          totalHateSpeech += 1;
+        if (Array.isArray(toxicityScore) && toxicityScore.length > 0) {
+          const isHateSpeech = toxicityScore[0] > 0.5;
+          hateSpeechData.push({ ...entry, isHateSpeech });
+          totalHateSpeech += isHateSpeech ? 1 : 0;
         }
       });
-
       setHateSpeechData(hateSpeechData);
       setTotalContent(querySnapshot.size);
     } catch (error) {
@@ -39,28 +39,26 @@ const HateSpeechOverview = () => {
   }, []);
 
   const data = {
-    labels: ['Non-Hate Speech', 'Hate Speech'],
-    datasets: [
-      {
-        data: [totalContent - totalHateSpeech, totalHateSpeech],
-        backgroundColor: ['rgba(75, 192, 192, 0.5)', 'rgba(255, 99, 132, 0.5)'],
-      },
-    ],
+    labels: ['Hate Speech', 'Non-Hate Speech'],
+    datasets: [{
+      data: [totalHateSpeech, totalContent - totalHateSpeech],
+      backgroundColor: ['rgba(255, 99, 132, 0.5)', 'rgba(75, 192, 192, 0.5)'],
+    }],
   };
+
+  const hateSpeechPercentage = totalContent === 0 ? 0 : ((totalHateSpeech / totalContent) * 100).toFixed(2);
 
   return (
     <div>
       <h2>Hate Speech Overview</h2>
-      {loading ? (
-        <p>Loading data...</p>
-      ) : error ? (
+      {loading ? <p>Loading data...</p> : error ? (
         <p>An error occurred while fetching data: {error.message}</p>
       ) : (
-        <div>
+        <div className="pt-4 font-mono">
           <Doughnut data={data} />
-          <p>Total Content: {totalContent}</p>
+          <p className="font-bold pt-5">Total Hatespeech: {totalHateSpeech}</p> 
           <p>Total Hate Speech Incidents: {totalHateSpeech}</p>
-          <p>Hate Speech Percentage: {((totalHateSpeech / totalContent) * 100).toFixed(2)}%</p>
+          <p>Hate Speech Percentage: {hateSpeechPercentage}%</p>
         </div>
       )}
     </div>
