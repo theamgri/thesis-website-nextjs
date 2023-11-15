@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
 import { collection, getDocs, query, where } from 'firebase/firestore';
+import { startOfWeek, endOfWeek, isWithinInterval } from 'date-fns';
 import { db } from './firebase';
 
 const DailyWeekendTrends = () => {
@@ -15,21 +16,26 @@ const DailyWeekendTrends = () => {
         const entry = doc.data();
         return {
           timestamp: entry.timestamp.toDate(),
-          TOXCITY_SCORE: entry.TOXCITY_SCORE, // Assuming toxicity_score is a single number
+          TOXCITY_SCORE: entry.TOXCITY_SCORE,
         };
       });
   
-      const sortedData = data.sort((a, b) => a.timestamp - b.timestamp);
-      console.log('Fetched Timestamp Data:', sortedData);
+      const currentWeekStart = startOfWeek(new Date(), { weekStartsOn: 1 }); // Assuming Monday is the start of the week
+      const currentWeekEnd = endOfWeek(new Date(), { weekStartsOn: 1 });
   
-      // Log the length of the data array
-      console.log('Data Length:', sortedData.length);
+      const filteredData = data.filter((entry) =>
+        isWithinInterval(entry.timestamp, { start: currentWeekStart, end: currentWeekEnd })
+      );
+  
+      const sortedData = filteredData.sort((a, b) => a.timestamp - b.timestamp);
+      console.log('Fetched Timestamp Data for This Week:', sortedData);
   
       setTimestampData(sortedData);
     } catch (error) {
       console.error('Error fetching timestamp data:', error);
     }
   };
+  
 
   const countDocuments = async () => {
     try {
@@ -139,18 +145,6 @@ useEffect(() => {
     }
   }
 }, [timestampData, chart]);
-
-// ... (rest of the component)
-
-// ... (rest of the component)
-
-
-// ... (rest of the component)
-
-
-
-
-
 
   return (
     <div className="w-full">

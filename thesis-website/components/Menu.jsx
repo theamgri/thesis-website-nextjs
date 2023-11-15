@@ -1,48 +1,52 @@
 import React, { useState } from 'react';
+import ReportsPage from '../components/ReportsPage'; 
+import { db } from './firebase.jsx';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const Menu = () => {
   const [isFocusVisible, setIsFocusVisible] = useState(false);
 
   const handleMenuClick = () => {
-    // Set the state to true when a menu item is clicked
-    setIsFocusVisible(true);
+    // Toggle the focus state
+    setIsFocusVisible(!isFocusVisible);
   };
 
   return (
     <div>
       {/* Your menu bar */}
-     
-      <ul class="m-5 w-50 rounded-2xl drop-shadow-xl hidden text-sm font-medium text-center text-white divide-x divide-gray-200 rounded-lg shadow sm:flex bg-black dark:bg-gray-900 dark:divide-gray-700">
-      <li class="w-full">
-          {/* <a href="#" className="inline-block font-medium w-full h-full p-4 text-black bg-gray-200 hover:bg-blue-300 focus:ring-4 focus:ring-blue-300 focus:outline-none" aria-current="page"> */}
-          <a id="sentimentLink" href="#" class="inline-block font-medium w-full h-full p-4 hover:text-white focus:ring-4 focus:ring-blue-300 focus:outline-none ">
-        <i class="fas fa-tachometer-alt"></i> Dashboard
+      <ul className="m-5 p-4 w-50 rounded-2xl drop-shadow-xl hidden text-sm font-medium text-center text-white divide-x divide-gray-200 rounded-lg shadow sm:flex bg-black dark:bg-gray-900 dark:divide-gray-700">
+        {/* <li className="w-full">
+          <a id="dashboardLink" href="#" className="menu-link">
+            <i className="fas fa-tachometer-alt"></i> Dashboard
           </a>
         </li>
-       
-        <li class="w-full">
-        {/* <!-- Add an ID to the link for JavaScript --> */}
-        <a id="sentimentLink" href="#" class="inline-block font-medium w-full h-full p-4 hover:text-white focus:ring-4 focus:ring-blue-300 focus:outline-none ">
-            <i class="fas fa-chart-line"></i> Sentiment Analysis
-        </a>
-    </li>
-    
-   
-    <li class="w-full">
-        {/* <!-- Add an ID to the link for JavaScript --> */}
-        <a id="sentimentLink" href="#" class="inline-block font-medium w-full p-4 hover:text-white focus:ring-4 focus:ring-blue-300 focus:outline-none ">
-            <i class="fas fa-chart-line"></i> Daily Weekend Trends
-        </a>
-    </li>
-    </ul>
-      
+        <li className="w-full">
+          <a id="sentimentLink" href="#" className="menu-link">
+            <i className="fas fa-chart-line"></i> Sentiment Analysis
+          </a>
+        </li>
+        <li className="w-full">
+          <a id="weekendTrendsLink" href="#" className="menu-link">
+            <i className="fas fa-chart-line"></i> Daily Weekend Trends
+          </a>
+        </li> */}
+        {/* Reports Section */}
+        <li className="w-full relative">
+          <a id="reportsLink" href="#" className="menu-link" onClick={handleMenuClick}>
+            <i className="fas fa-file-alt"></i> View Reports
+          </a>
+          {/* Submenu */}
+         
+        </li>
+      </ul>
 
       {/* The focus div */}
       {isFocusVisible && (
-        <div className="focus-div">
-          {/* Content of the focus div */}
-          <p>This is the focus div content.</p>
-          {/* You can add more content or components here */}
+      
+            <div className="focus-div ">
+                
+                <ReportsPage />
+         
         </div>
       )}
     </div>

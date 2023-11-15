@@ -1,18 +1,15 @@
 "use client"
 import Navbar from '../components/Navbar';
 import { db } from '../components/firebase.jsx';
-
+import ReportsPage from '../components/ReportsPage';
 import DailyWeekendTrends from '../components/DailyWeekendTrends';
-
 import SentimentAnalysis from '@/components/SentimentAnalysis';
 import Overview from '@/components/Overview';
+
 import Menu from '@/components/Menu';
-// import { db } from './firebase.jsx';
-// fetching data
-const fetchData = async () => {
-  const data = await db.collection('sentiment').get();
-  // Process the data
-};
+
+
+
 export default function Home() {
   return (
     <main>
@@ -21,9 +18,6 @@ export default function Home() {
       <div className="flex flex-col items-center justify-between pt-24">
         <div className="text-right font-bold text-2xl opacity-50 mt-8 font-mono">
           <h1>Analytics Overview</h1>
-        </div>
-        <div>
-          <Menu />
         </div>
       </div>
 
@@ -34,7 +28,7 @@ export default function Home() {
         </div>
 
         {/* Second Column */}
-        <div className="w-full md:w-1/2 lg:w-2/3 xl:w-3/4 p-4 text-center">
+        <div className="w-full md:w-1/2 lg:w-2/3 xl:w-3/4 p-4">
           <div className="flex flex-wrap">
             <div className="w-full md:w-1/2 p-2">
               <DailyWeekendTrends />
@@ -42,7 +36,11 @@ export default function Home() {
             <div className="w-full md:w-1/2 p-2">
               <SentimentAnalysis />
             </div>
-          </div>
+            <div className="w-full md:w-1/2 p-2">
+          <Menu />
+        </div>
+
+          </div> 
         </div>
       </div>
     </main>
