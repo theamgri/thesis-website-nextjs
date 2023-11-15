@@ -31,8 +31,8 @@ const ReportCard = ({ report, onDelete }) => {
       <div className="bg-slate-900 w-full md:w-1/2 lg:w-1/3 p-2 rounded overflow-hidden shadow-lg m-4 p-4">
         <div className="font-bold text-xl mb-2">{report.text}</div>
         <div className="text-gray-400 mb-2">{report.category}</div>
-        <div className="text-gray-400 mb-2">{`TOXCITY_SCORE: ${report.TOXCITY_SCORE}`}</div>
-        <div className="text-gray-400">{`Timestamp: ${formattedTimestamp}`}</div>
+        <div className="text-gray-400 mb-2">{`${report.TOXCITY_SCORE}`}</div>
+        <div className="text-gray-400">{`${formattedTimestamp}`}</div>
         <button
           className="bg-red-500 text-white px-4 py-2 rounded mt-4"
           onClick={handleDelete}

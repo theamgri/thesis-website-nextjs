@@ -68,83 +68,88 @@ const DailyWeekendTrends = () => {
 
 
 
-useEffect(() => {
-  console.log('Timestamp Data:', timestampData);
+  useEffect(() => {
+    console.log('Timestamp Data:', timestampData);
 
-  if (timestampData.length > 0 && chartRef.current) {
-    try {
-      const ctx = chartRef.current.getContext('2d');
-      if (!ctx) {
-        console.error('Unable to get chart context.');
-        return;
-      }
+    if (timestampData.length > 0 && chartRef.current) {
+      try {
+        const ctx = chartRef.current.getContext('2d');
+        if (!ctx) {
+          console.error('Unable to get chart context.');
+          return;
+        }
 
-      const labels = timestampData.map((entry) => identifyDay(entry.timestamp));
-      const toxicityScores = timestampData.map((entry) => entry.TOXCITY_SCORE); // Corrected field name
+        const labels = timestampData.map((entry) => identifyDay(entry.timestamp));
 
-      console.log('Labels:', labels);
-      console.log('Toxicity Scores:', toxicityScores);
+        const toxicityScores = timestampData.map((entry) => entry.TOXCITY_SCORE);
 
-      const data = {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Toxicity Scores Progress',
-            data: toxicityScores,
-            backgroundColor: toxicityScores.map((score) =>
-              score > 0.5 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(75, 192, 192, 0.5)'
-            ),
-            borderColor: toxicityScores.map((score) =>
-              score > 0.5 ? 'rgba(255, 99, 132, 1)' : 'rgba(75, 192, 192, 1)'
-            ),
-            borderWidth: 1,
-          },
-        ],
-      };
+        console.log('Labels:', labels);
+        console.log('Toxicity Scores:', toxicityScores);
 
-      console.log('Data:', data);
-
-      if (!chart) {
-        const newChart = new Chart(ctx, {
-          type: 'bar',
-          data: data,
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true,
-                suggestedMax: 1,
-              },
+        const data = {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Toxicity Scores Progress',
+              data: toxicityScores,
+              backgroundColor: toxicityScores.map((score) =>
+                score > 0.5 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(75, 192, 192, 0.5)'
+              ),
+              borderColor: toxicityScores.map((score) =>
+                score > 0.5 ? 'rgba(255, 99, 132, 1)' : 'rgba(75, 192, 192, 1)'
+              ),
+              borderWidth: 1,
             },
-            plugins: {
-              tooltip: {
-                callbacks: {
-                  title: function (tooltipItem) {
-                    return tooltipItem[0].label;
-                  },
-                  label: function (context) {
-                    return `Toxicity Score: ${context.dataset.data[context.dataIndex]}`;
+          ],
+        };
+
+        console.log('Data:', data);
+
+        if (!chart) {
+          const newChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+              scales: {
+                x: {
+                  stacked: true,
+                },
+                y: {
+                  stacked: true,
+                  beginAtZero: true,
+                  suggestedMax: 1,
+                },
+              },
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    title: function (tooltipItem) {
+                      return tooltipItem[0].label;
+                    },
+                    label: function (context) {
+                      return `Toxicity Score: ${context.dataset.data[context.dataIndex]}`;
+                    },
                   },
                 },
               },
             },
-          },
-        });
+          });
 
-        console.log('Chart created:', newChart);
-        setChart(newChart);
-      } else {
-        chart.data.labels = labels;
-        chart.data.datasets[0].data = toxicityScores;
-        chart.data.datasets[0].backgroundColor = data.datasets[0].backgroundColor;
-        chart.data.datasets[0].borderColor = data.datasets[0].borderColor;
-        chart.update();
-        console.log('Chart updated:', chart);
+          console.log('Chart created:', newChart);
+          setChart(newChart);
+        } else {
+          chart.data.labels = labels;
+          chart.data.datasets[0].data = toxicityScores;
+          chart.data.datasets[0].backgroundColor = data.datasets[0].backgroundColor;
+          chart.data.datasets[0].borderColor = data.datasets[0].borderColor;
+          chart.update();
+          console.log('Chart updated:', chart);
+        }
+      } catch (error) {
+        console.error('Error creating/updating chart:', error);
       }
-    } catch (error) {
-      console.error('Error creating/updating chart:', error);
     }
-  }
-}, [timestampData, chart]);
+  }, [timestampData, chart]);
 
   return (
     <div className="w-full">
